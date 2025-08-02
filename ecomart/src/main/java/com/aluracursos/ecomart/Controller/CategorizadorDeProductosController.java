@@ -3,6 +3,7 @@ package com.aluracursos.ecomart.Controller;
 import com.knuddels.jtokkit.Encodings;
 import com.knuddels.jtokkit.api.EncodingType;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.prompt.ChatOptions;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ public class CategorizadorDeProductosController {
                 .system(system)
                 .user(producto)
                 .options(ChatOptions.builder().model("mistral-tiny").temperature(0.8).build())
+                .advisors(new SimpleLoggerAdvisor())
                 .call()
                 .content();
     }
